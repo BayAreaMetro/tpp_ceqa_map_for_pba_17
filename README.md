@@ -1,21 +1,7 @@
 [Problem Statement](#problem-statement)   
 [Data Sources](#data-sources)   
-[Land Use Data](#land-use-data)   
-[Transportation Data](#transportation-data)   
-[Analysis Parameters](#analysis-parameters)   
 [Methodology](#methodology)   
-[aggregation technique and boolean assignment of areas:](#aggregation-technique-and-boolean-assignment-of-areas:   )   
-[average density method](#average-density-method)   
-[use of percentile rather than average](#use-of-percentile-rather-than-average)   
-[can't assume land use distributions within a taz are normal ](#can't-assume-land-use-distributions-within-a    taz-are-normal)   
-[steps to do get the output:](#steps-to-do-get-the-output:)   
-[cartographic methods](#cartographic-methods)   
-[clipping to urban footprint](#clipping-to-urban-footprint)   
 [outcome](#outcome)   
-[output data details](#output-data-details)   
-[average density version:](#average-density-version:)   
-[normal distribution version:](#normal-distribution-version:)   
-[alternative distributions version:](#alternative-distributions-version:)   
 
 ###Problem Statement
 
@@ -54,11 +40,21 @@ Therefore, at a basic level, what is needed is:
 
 ###Methodology    
 
+[aggregation technique and boolean assignment of areas:](#aggregation-technique-and-boolean-assignment-of-areas:)    
+[cartographic methods](#cartographic-methods)   
+[clipping to urban footprint](#clipping-to-urban-footprint)   
+
+
 Once we have the above data, we can simply assign a TAZ a 'yes' or 'no' value based on the CEQA thresholds of 20 units per acre and .75 FAR (for mixed use projects).  
 
 ####Aggregation Technique and Boolean Assignment of Areas:  
 
 The first problem that we faced was that the data that we had are measured at the parcel level. So we had to aggragate that data up to TAZ's in order to assign a TAZ 'yes' OR 'no'. Since CEQA projects apply to projects that are consistent with the Sustainable Communities Strategy, including all land use designations, employment distribution densities,building space intensities and applicable policies, We had to spend some time thinking about what the appropriate method was for deciding what threshold a TAZ shuold meet for being a potential 'yes' or 'no'. Below we outline some of the methods we considered.   
+
+[average density method](#average-density-method)   
+[use of percentile rather than average](#use-of-percentile-rather-than-average)   
+[can't assume land use distributions within a taz are normal ](#can't-assume-land-use-distributions-within-a    taz-are-normal)   
+
 
 #####Average Density Method   
 
@@ -107,6 +103,11 @@ The clipped feature class is named `far_sp_q4_clip_to_uf_and_tpa`.
 The best next step might be to choose quartile that works and then clip it. Or clip all of the feature classes and then review. 
 
 ###Outcome
+
+[output data details](#output-data-details)   
+[average density version:](#average-density-version:)   
+[normal distribution version:](#normal-distribution-version:)   
+[alternative distributions version:](#alternative-distributions-version:)   
 
 Data [here](https://mtcdrive.box.com/s/j9p7gzfoq7uj4qena9c8zn3t8o8rw76i)   
 
