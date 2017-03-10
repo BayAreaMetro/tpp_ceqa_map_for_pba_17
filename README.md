@@ -1,7 +1,7 @@
 [Problem Statement](#problem-statement)   
 [Data Sources](#data-sources)   
 [Methodology](#methodology)   
-[outcome](#outcome)   
+[Outcome](#outcome)   
 
 ###Problem Statement
 
@@ -40,7 +40,7 @@ Therefore, at a basic level, what is needed is:
 
 ###Methodology    
 
-[aggregation technique and boolean assignment of areas:](#aggregation-technique-and-boolean-assignment-of-areas:)    
+[aggregation technique and boolean assignment of areas](#aggregation-technique-and-boolean-assignment-of-areas)    
 [cartographic methods](#cartographic-methods)   
 [clipping to urban footprint](#clipping-to-urban-footprint)   
 
@@ -53,7 +53,7 @@ The first problem that we faced was that the data that we had are measured at th
 
 [average density method](#average-density-method)   
 [use of percentile rather than average](#use-of-percentile-rather-than-average)   
-[can't assume land use distributions within a taz are normal ](#can't-assume-land-use-distributions-within-a    taz-are-normal)   
+[can't assume land use distributions within a taz are normal](#can't-assume-land-use-distributions-within-a-taz-are-normal)   
 
 
 #####Average Density Method   
@@ -105,9 +105,9 @@ The best next step might be to choose quartile that works and then clip it. Or c
 ###Outcome
 
 [output data details](#output-data-details)   
-[average density version:](#average-density-version:)   
-[normal distribution version:](#normal-distribution-version:)   
-[alternative distributions version:](#alternative-distributions-version:)   
+[average density version:](#average-density-version)   
+[normal distribution version:](#normal-distribution-version)   
+[alternative distributions version:](#alternative-distributions-version)   
 
 Data [here](https://mtcdrive.box.com/s/j9p7gzfoq7uj4qena9c8zn3t8o8rw76i)   
 
