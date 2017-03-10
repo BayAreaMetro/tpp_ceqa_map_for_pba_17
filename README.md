@@ -26,7 +26,7 @@ UrbanSim Preferred scenario/FMMP urban footprint file (available [here](http://m
 
 ###Analysis Parameters  
 
-CEQA Streamlining on is based on the Floor Area Ratio and the Units per Acre of an individualsite and the location of the site within a Transit Priority Area. In the Model Map, a boolean value for whether CEQA streamlining was likely was estimated at the TAZ level for the given TAZ. It is unclear in that map what year the map was estimated for but we assume 2040 for this process.   
+CEQA Streamlining on is based on the Floor Area Ratio and the Units per Acre of an individual site and the location of the site within a Transit Priority Area. In the Model Map, a boolean value for whether CEQA streamlining was likely was estimated at the TAZ level for the given TAZ. It is unclear in that map what year the map was estimated for but we assume 2040 for this process.   
 
 Therefore, at a basic level, what is needed is:   
 1  The Floor Area Ratio for each TAZ   
@@ -35,7 +35,11 @@ Therefore, at a basic level, what is needed is:
 
 ###Methodology    
 
-####Aggregation Technique and Boolean Assignment of Areas:    
+Once we have the above data, we can simply assign a TAZ a 'yes' or 'no' value based on the CEQA thresholds of 20 units per acre and .75 FAR (for mixed use projects).  
+
+####Aggregation Technique and Boolean Assignment of Areas:  
+
+The first problem that we faced was that the data that we had are measured at the parcel level. So we had to aggragate that data up to TAZ's in order to assign a TAZ 'yes' OR 'no'. Since CEQA projects apply to projects that are consistent with the Sustainable Communities Strategy, including all land use designations, employment distribution densities,building space intensities and applicable policies, We had to spend some time thinking about what the appropriate method was for deciding what threshold a TAZ shuold meet for being a potential 'yes' or 'no'. Below we outline some of the methods we considered.   
 
 #####Average Density Method   
 
@@ -78,7 +82,6 @@ Once we had hammered out some of the methodological issues above, it became clea
 #####Clipping to Urban Footprint   
 
 The unit to which we are aggregating (the TAZ) makes sense for modeling, but presents problems cartographically. For example, there is a large TPA in the Presidio by GG Bridge, and a large TAZ there as well. So if we only clip the TAZ summaries to the TPA's, we end up with areas that are unlikely to see CEQA projects.   
-
 
 The clipped feature class is named `far_sp_q4_clip_to_uf_and_tpa`.    
 
