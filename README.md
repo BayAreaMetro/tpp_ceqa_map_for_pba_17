@@ -117,11 +117,11 @@ In creating the feature classes for this map we went through several iterations:
 
 #####Output Data Details    
 
-######Average Density Version:   
+#####Average Density Version:   
 
 FileGDB [here](https://mtcdrive.box.com/s/tn7lmjryk7hgg8gsi0uogwq8vdof2yl0)
 
-######Normal Distribution Version:
+#####Normal Distribution Version:
 
 The feature classes in here include:
 
@@ -129,7 +129,7 @@ The feature classes in here include:
 2) potential CEQA TAZ's based on Units per acre AND FAR   
 3) potential CEQA TAZ's (*_ALL_VARS) clipped to the TPA's (which are a necessary area qualification for SQL) with all source data, regardless of what density threshold they meet. we included this last feature class in order to allow us to review all density values and potentially simply toggle on those.   
 
-######Alternative Distributions Version:   
+#####Alternative Distributions Version:   
 
 The output of the 3rd round is a set of feature classes, each of which is subset to a given quartile threshold. 
 
