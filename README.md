@@ -14,7 +14,10 @@ For convenience, we've developed a FileGDB of the data being used for and output
 
 The majority of the land use data for this map are from County Assessors, ESRI, RedFin, CoStar, and MTC, as documented [here](https://github.com/MetropolitanTransportationCommission/bayarea_urbansim/blob/master/data_regeneration/metadata.csv).   
 
-A subset of these data, those that reflect change between years 2010 and 2040, are output by MTC's implementation of [UrbanSim](https://github.com/MetropolitanTransportationCommission/bayarea_urbansim). The UrbanSim output we use are all sourced from [Box](https://mtcdrive.box.com/s/zk8xw9i531sa5czfrn2qpg6fes6agsa4).   
+A subset of these data, those that reflect change between years 2010 and 2040, are output by MTC's implementation of [UrbanSim](https://github.com/MetropolitanTransportationCommission/bayarea_urbansim). The UrbanSim output we use are all sourced from [Box](https://mtcdrive.box.com/s/zk8xw9i531sa5czfrn2qpg6fes6agsa4). 
+
+UrbanSim Preferred scenario/FMMP urban footprint file (available [here](http://mtc.maps.arcgis.com/home/item.html?id=43cd558b015143089d62226396d1d11e&jobid=47cfc388-f7fb-41a1-ae34-1fb1029566b6).     
+
 ####Transportation Data  
 
 [TAZ](http://analytics.mtc.ca.gov/foswiki/Main/TazData)   
@@ -30,51 +33,52 @@ Therefore, at a basic level, what is needed is:
 2  The Units per Acre for each TAZ   
 3  The location of Transit Priority areas   
 
-###Methodology   
+###Methodology    
 
-####Average Density
+####Aggregation Technique and Boolean Assignment of Areas:    
 
-(3) is readily available from the TPA data above. (1) and (2) were summarized from UrbanSim outputs on the DEIR database using the `sql/get_far_and_density.sql` script.  
+#####Average Density Method   
+
+(1) and (2) were summarized from UrbanSim outputs on the DEIR database using the `sql/get_far_and_density.sql` script.  
 
 In this case, we defined the Floor Area Ratio and the Units per Acre for each TAZ as the average over each parcel within each TAZ.   
- 
-We made a number of changes since the feature classes output here, so it probably isn't necessary to review them. But they are here in any case in case thats useful.  
+  
+An AGOL Map based on this method is [here](http://arcg.is/2m8H2aK)  
 
-An AGOL Map of the first round of data is [here](http://arcg.is/2m8H2aK)  
+#####Use of Percentile rather than Average   
 
-A box folder with the data for this map in FileGDB form is [here](https://mtcdrive.box.com/s/spz1yatu4nq16kwe4xdu3cms32w6a04h)  
-
-The pull request for the SQL used to output these feature classes is [here](https://github.com/MetropolitanTransportationCommission/UrbanSim_Spatial_Analysis/pull/5)    
-
-####Use of Percentile rather than Average  
-
-In reviewing the first round, we found that there were a number of places in which we expected CEQA might be likely to be applied which were not included in the map including: Berkeley, some parts of Western SF, and areas along North 1st Street in San Jose. In addition, there were a few places such as North Vallejo and South Novato in which development CEQA application seems like it would have been unlikely.  
+In reviewing the above we found that there were a number of places in which we expected CEQA might be likely to be applied which were not included in the map including: Berkeley, some parts of Western SF, and areas along North 1st Street in San Jose. In addition, there were a few places such as North Vallejo and South Novato in which development CEQA application seems like it would have been unlikely.  
 
 So we tried applying a method in which any TAZ in which the 80th percentile (top 20% of the distribution) of parcels might qualify for CEQA would be tagged as a potential CEQA streamlining TAZ. 
 
-A link/ pull request to the sql code is in the `sql/get_far_and_density.sql` script.   
+An AGOL Map of data based on this method is [here](http://mtc.maps.arcgis.com/home/item.html?id=c75f9011843842eb96b64ff28abbb698&jobid=a30452e8-ebd7-4da2-a46e-6a747288637c).   
 
-An AGOL Map of the a data of the second round of data is [here](http://mtc.maps.arcgis.com/home/item.html?id=c75f9011843842eb96b64ff28abbb698&jobid=a30452e8-ebd7-4da2-a46e-6a747288637c)  
+The SQL query used to summarize the data is [here](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/blob/master/sql/get_far_and_density.sql#L67-L86).   
 
-####Can't Assume Land use Distributions within a TAZ are Normal   
+#####Can't Assume Land Use Distributions within a TAZ are Normal    
 
-We decided that the method used in the second round, using an assumed normal distribution for density, was unreasonable. So we applied a threshold of the 80th percentile within each TAZ based on the actual distribution of the given variable (Units per Acre or FAR) within each taz.   
+Another methodological issue is that using an assumed normal distribution for density is unreasonable. So we applied a threshold of the 80th percentile within each TAZ based on the actual distribution of the given variable (Units per Acre or FAR) within each taz.    
+
+All of the feature classes at the various quartiles  are output to an AGOL map [here](http://mtc.maps.arcgis.com/home/item.html?id=46a5f6b4c0c44bf6b529daa157ce8be8).   
+
+######Steps to do get the output:   
 
 It was more expedient to use Pandas to apply the quantile analysis, so we followed the following steps to get quantile thresholds for each TAZ for each density value:
 
 1) dump the parcel density table (`UrbanSim.Parcels_FAR_Units_Per_Acre_SP`) to disk
 
-2) create CSV's of the values at a set of reasonable quantiles within each TAZ (`calculate_taz_percentile_values.py`)
+2) create CSV's of the values at a set of reasonable quantiles within each TAZ (`python/calculate_taz_percentile_values.py`)
 
-3) load those CSV's back to a FileGDB with TAZ geometries. AGOL link to data [here](http://mtc.maps.arcgis.com/home/item.html?id=0d4c83530b9f4039a09a497b28e2a386). (`load_taz_quantile_data.bat`, `join_taz_quantiles_to_shapes.bat`)   
+3) load those CSV's back to a FileGDB with TAZ geometries. AGOL link to data [here](http://mtc.maps.arcgis.com/home/item.html?id=0d4c83530b9f4039a09a497b28e2a386). (`load_taz_quantile_data.bat`, `join_taz_quantiles_to_shapes.bat`)    
 
-####Clipping to Urban Footprint
+####Cartographic Methods   
+
+Once we had hammered out some of the methodological issues above, it became clear that there were also cartographic decisions at play in the Model Map. Below we discuss those.   
+
+#####Clipping to Urban Footprint   
 
 The unit to which we are aggregating (the TAZ) makes sense for modeling, but presents problems cartographically. For example, there is a large TPA in the Presidio by GG Bridge, and a large TAZ there as well. So if we only clip the TAZ summaries to the TPA's, we end up with areas that are unlikely to see CEQA projects.   
 
-Therefore, we also clipped an example TAZ output to the UrbanSim Preferred scenario/FMMP urban footprint file (available [here](http://mtc.maps.arcgis.com/home/item.html?id=43cd558b015143089d62226396d1d11e&jobid=47cfc388-f7fb-41a1-ae34-1fb1029566b6).    
-
-You can see an example of what this clipping looks like, along with all of the feature classes at the various quartiles [here](http://mtc.maps.arcgis.com/home/item.html?id=46a5f6b4c0c44bf6b529daa157ce8be8).  
 
 The clipped feature class is named `far_sp_q4_clip_to_uf_and_tpa`.    
 
