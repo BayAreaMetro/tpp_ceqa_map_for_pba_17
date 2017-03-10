@@ -1,3 +1,22 @@
+[Problem Statement](###Problem Statement)
+[Data Sources](###Data Sources)
+[Land Use Data](####Land Use Data)
+[Transportation Data](####Transportation Data)
+[Analysis Parameters](###Analysis Parameters)
+[Methodology](###Methodology)
+[Aggregation Technique and Boolean Assignment of Areas:](####Aggregation Technique and Boolean Assignment of Areas:)
+[Average Density Method](#####Average Density Method)
+[Use of Percentile rather than Average](#####Use of Percentile rather than Average)
+[Can't Assume Land Use Distributions within a TAZ are Normal ](#####Can't Assume Land Use Distributions within a TAZ are Normal)
+[Steps to do get the output:](######Steps to do get the output:)
+[Cartographic Methods](####Cartographic Methods)
+[Clipping to Urban Footprint](#####Clipping to Urban Footprint)
+[Outcome](###Outcome)
+[Output Data Details](#####Output Data Details)
+[Average Density Version:](######Average Density Version:)
+[Normal Distribution Version:](######Normal Distribution Version:)
+[Alternative Distributions Version:](######Alternative Distributions Version:)
+
 ###Problem Statement
 
 The Model Map (MM) is on page 61 in the PBA '13 document. Excepting the paper map itself, the data and the methods that were used for that map are not available to us. The goal is to re-create a version of that map using current data.  
@@ -94,10 +113,6 @@ Data [here](https://mtcdrive.box.com/s/j9p7gzfoq7uj4qena9c8zn3t8o8rw76i)
 Map [here](http://arcg.is/XGm5v)  
 
 In creating the feature classes for this map we went through several iterations:
-
-###Background and Previous Versions
-
-Below is a hastily documented version of how we got to the final output   
 
 #####Output Data Details    
 
