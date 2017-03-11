@@ -31,12 +31,14 @@ UrbanSim Preferred scenario/FMMP urban footprint file (available [here](http://m
 
 ###Analysis Parameters  
 
-CEQA Streamlining on is based on the Floor Area Ratio and the Units per Acre of an individual site and the location of the site within a Transit Priority Area. In the Model Map, a boolean value for whether CEQA streamlining was likely was estimated at the TAZ level for the given TAZ. It is unclear in that map what year the map was estimated for but we assume 2040 for this process.   
-
-Therefore, at a basic level, what is needed is:   
+We need to assign each TAZ a 'yes' or 'no' value based on the CEQA thresholds of 20 units per acre and .75 FAR (for mixed use projects).  
+At base, we will need to know about the following parameters:   
 1  The Floor Area Ratio for each TAZ   
 2  The Units per Acre for each TAZ   
 3  The location of Transit Priority areas   
+
+CEQA Streamlining on is based on the Floor Area Ratio and the Units per Acre of an individual site and the location of the site within a Transit Priority Area. In the Model Map, a boolean value for whether CEQA streamlining was likely was estimated at the TAZ level for the given TAZ. It is unclear in that map what year the map was estimated for but we assume 2040 for this process.   
+
 
 ###Methodology    
 
@@ -45,7 +47,7 @@ Therefore, at a basic level, what is needed is:
 [clipping to urban footprint](#clipping-to-urban-footprint)   
 
 
-Once we have the above data, we can simply assign a TAZ a 'yes' or 'no' value based on the CEQA thresholds of 20 units per acre and .75 FAR (for mixed use projects).  
+
 
 ####Aggregation Technique and Boolean Assignment of Areas:  
 
