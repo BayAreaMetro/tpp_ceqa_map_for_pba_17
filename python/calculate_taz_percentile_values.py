@@ -3,7 +3,10 @@ df = pd.read_csv("data/parcels_far_ua.csv")
 
 def get_quantile_for_col(quantile, series):	
 	return 
-	
+
+(df.far_estimate == 0).value_counts()
+#~142k parcels have 0 as far_estimate or units_per_acre
+
 df1 = df.loc[df['far_estimate'] != 0]
 df2 = df.loc[df['units_per_acre'] != 0]
 
