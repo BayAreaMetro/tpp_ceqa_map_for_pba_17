@@ -1,7 +1,7 @@
 [Problem Statement](#problem-statement)   
 [Data Sources](#data-sources)   
 [Methodology](#methodology)   
-[outcome](#outcome)   
+[Outcome](#outcome)   
 
 ###Problem Statement
 
@@ -31,21 +31,23 @@ UrbanSim Preferred scenario/FMMP urban footprint file (available [here](http://m
 
 ###Analysis Parameters  
 
-CEQA Streamlining on is based on the Floor Area Ratio and the Units per Acre of an individual site and the location of the site within a Transit Priority Area. In the Model Map, a boolean value for whether CEQA streamlining was likely was estimated at the TAZ level for the given TAZ. It is unclear in that map what year the map was estimated for but we assume 2040 for this process.   
-
-Therefore, at a basic level, what is needed is:   
+We need to assign each TAZ a 'yes' or 'no' value based on the CEQA thresholds of 20 units per acre and .75 FAR (for mixed use projects).  
+At base, we will need to know about the following parameters:   
 1  The Floor Area Ratio for each TAZ   
 2  The Units per Acre for each TAZ   
 3  The location of Transit Priority areas   
 
+CEQA Streamlining on is based on the Floor Area Ratio and the Units per Acre of an individual site and the location of the site within a Transit Priority Area. In the Model Map, a boolean value for whether CEQA streamlining was likely was estimated at the TAZ level for the given TAZ. It is unclear in that map what year the map was estimated for but we assume 2040 for this process.   
+
+
 ###Methodology    
 
-[aggregation technique and boolean assignment of areas:](#aggregation-technique-and-boolean-assignment-of-areas:)    
+[aggregation technique and boolean assignment of areas](#aggregation-technique-and-boolean-assignment-of-areas)    
 [cartographic methods](#cartographic-methods)   
 [clipping to urban footprint](#clipping-to-urban-footprint)   
 
 
-Once we have the above data, we can simply assign a TAZ a 'yes' or 'no' value based on the CEQA thresholds of 20 units per acre and .75 FAR (for mixed use projects).  
+
 
 ####Aggregation Technique and Boolean Assignment of Areas:  
 
@@ -53,7 +55,7 @@ The first problem that we faced was that the data that we had are measured at th
 
 [average density method](#average-density-method)   
 [use of percentile rather than average](#use-of-percentile-rather-than-average)   
-[can't assume land use distributions within a taz are normal ](#can't-assume-land-use-distributions-within-a    taz-are-normal)   
+[can't assume land use distributions within a taz are normal](#can't-assume-land-use-distributions-within-a-taz-are-normal)   
 
 
 #####Average Density Method   
@@ -105,9 +107,9 @@ The best next step might be to choose quartile that works and then clip it. Or c
 ###Outcome
 
 [output data details](#output-data-details)   
-[average density version:](#average-density-version:)   
-[normal distribution version:](#normal-distribution-version:)   
-[alternative distributions version:](#alternative-distributions-version:)   
+[average density version](#average-density-version)   
+[normal distribution version](#normal-distribution-version)   
+[alternative distributions version](#alternative-distributions-version)   
 
 Data [here](https://mtcdrive.box.com/s/j9p7gzfoq7uj4qena9c8zn3t8o8rw76i)   
 
@@ -117,11 +119,11 @@ In creating the feature classes for this map we went through several iterations:
 
 #####Output Data Details    
 
-######Average Density Version:   
+#####Average Density Version:   
 
 FileGDB [here](https://mtcdrive.box.com/s/tn7lmjryk7hgg8gsi0uogwq8vdof2yl0)
 
-######Normal Distribution Version:
+#####Normal Distribution Version:
 
 The feature classes in here include:
 
@@ -129,7 +131,7 @@ The feature classes in here include:
 2) potential CEQA TAZ's based on Units per acre AND FAR   
 3) potential CEQA TAZ's (*_ALL_VARS) clipped to the TPA's (which are a necessary area qualification for SQL) with all source data, regardless of what density threshold they meet. we included this last feature class in order to allow us to review all density values and potentially simply toggle on those.   
 
-######Alternative Distributions Version:   
+#####Alternative Distributions Version:   
 
 The output of the 3rd round is a set of feature classes, each of which is subset to a given quartile threshold. 
 
