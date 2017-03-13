@@ -107,9 +107,9 @@ The best next step might be to choose quartile that works and then clip it. Or c
 ###Outcome
 
 [output data details](#output-data-details)   
-[average density version:](#average-density-version)   
-[normal distribution version:](#normal-distribution-version)   
-[alternative distributions version:](#alternative-distributions-version)   
+[average density version](#average-density-version)   
+[normal distribution version](#normal-distribution-version)   
+[alternative distributions version](#alternative-distributions-version)   
 
 Data [here](https://mtcdrive.box.com/s/j9p7gzfoq7uj4qena9c8zn3t8o8rw76i)   
 
