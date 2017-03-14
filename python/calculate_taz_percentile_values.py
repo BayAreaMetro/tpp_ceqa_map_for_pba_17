@@ -16,22 +16,27 @@ import numpy as np
 df1.set_index("taz_id", inplace=True)
 s1 = df1['far_estimate'].groupby(by=df1.index).quantile(0.8)
 s2 = df1['far_estimate'].groupby(by=df1.index).size()
-df3 = pd.DataFrame(index=s1.index)
-df3["count"] = s2
-df3["far_estimate_q8"] = s2
 
 df2.set_index("taz_id", inplace=True)
 s3 = df2['units_per_acre'].groupby(by=df2.index).quantile(0.8)
 s4 = df2['units_per_acre'].groupby(by=df2.index).size()
 df4 = pd.DataFrame(index=s3.index)
-df4["count"] = s4
-df4["units_per_acre_q8"] = s3
 
-df3.to_csv("data/taz_far_quantiles.csv", index=True)
-df4.to_csv("data/taz_units_per_acre_quantiles.csv", index=True)
+df3 = pd.DataFrame(index=s1.index)
+df3["far_prcnt_estimate_q8"] = s1*100
+df3["far_estimate_count"] = s2
+df3["units_per_acre_q8"] = s3
+df3["units_per_acre_estimate_count"] = s4
+
+df3.to_csv("data/taz_ua_far_quantiles.csv", index=True)
 
 print(df3.head())
 print(df4.head())
 
+print("total counts:")
 print(s2.value_counts().head())
 print(s4.value_counts().head())
+
+print("q8 counts:")
+print(s1.value_counts().head())
+print(s3.value_counts().head())
