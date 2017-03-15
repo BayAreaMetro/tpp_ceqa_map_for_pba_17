@@ -63,3 +63,48 @@ SELECT  far_estimate,
   		WHERE units_per_acre > 0;
 
 GO
+
+create view UrbanSim.Parcels_FAR_Units_Per_Acre_SP as
+SELECT  pb.estimated_residential_square_feet as est_res_sq_ft,
+		pb.units_per_acre,
+		pb.far_estimate,
+		p.OBJECTID,
+		p.PARCEL_ID,
+		p.tpa_objectid,
+		p.taz_id,
+		p.superd_id,
+		pc.Centroid
+  FROM  DEIR2017.UrbanSim.Parcels_FAR_Units_Per_Acre as pb
+		JOIN DEIR2017.UrbanSim.Parcels as p 
+			ON pb.parcel_id = p.parcel_id
+		JOIN DEIR2017.UrbanSim.Parcels_Centroid_Only pc
+			ON p.parcel_id = pb.parcel_id;
+
+GOs
+
+-----------------
+--check on individual parcels in the following taz:  
+
+create view UrbanSim.Parcels_FAR_Units_Per_Acre_False_Positive_SP as
+SELECT  pb.est_res_sq_ft,
+		pb.units_per_acre,
+		pb.far_estimate,
+		p.OBJECTID,
+		p.PARCEL_ID,
+		p.tpa_objectid,
+		p.taz_id,
+		p.Acres,
+		Y2040.total_residential_units,
+		p.Shape
+  FROM  DEIR2017.UrbanSim.Parcels_FAR_Units_Per_Acre as pb
+		JOIN DEIR2017.UrbanSim.Parcels as p
+			ON pb.parcel_id = p.parcel_id
+		JOIN UrbanSim.RUN7224_PARCEL_DATA_2040 AS y2040 ON p.PARCEL_ID = y2040.parcel_id
+		WHERE p.taz_id IN (1448, 1447, 1438, 1437, 1407)
+
+
+CREATE VIEW UrbanSim.Parcels_FAR_Units_Per_Acre AS
+SELECT  Y2040.total_residential_units JOIN
+		UrbanSim.RUN7224_PARCEL_DATA_2040 AS y2040 ON p.PARCEL_ID = y2040.parcel_id;
+
+/*potential false negatives: 409, 407, 547, 437, 436, 439, 599, 625, 554*/
