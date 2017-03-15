@@ -51,7 +51,7 @@ CEQA Streamlining on is based on the Floor Area Ratio and the Units per Acre of 
 
 #### Aggregation Technique and Boolean Assignment of Areas:  
 
-The first problem that we faced was that the data that we had are measured at the parcel level. So we had to aggragate that data up to TAZ's in order to assign a TAZ 'yes' OR 'no'. Since CEQA projects apply to projects that are consistent with the Sustainable Communities Strategy, including all land use designations, employment distribution densities,building space intensities and applicable policies, We had to spend some time thinking about what the appropriate method was for deciding what threshold a TAZ shuold meet for being a potential 'yes' or 'no'. Below we outline some of the methods we considered.   
+The first problem that we faced was that the data that we had are measured at the parcel level. So we had to aggregate that data up to TAZ's in order to assign a TAZ 'yes' OR 'no'. Since CEQA projects apply to projects that are consistent with the Sustainable Communities Strategy, including all land use designations, employment distribution densities,building space intensities and applicable policies, We had to spend some time thinking about what the appropriate method was for deciding what threshold a TAZ shuold meet for being a potential 'yes' or 'no'. Below we outline some of the methods we considered.   
 
 [average density method](#average-density-method)   
 [use of percentile rather than average](#use-of-percentile-rather-than-average)   
