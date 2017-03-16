@@ -1,3 +1,3 @@
-ogr2ogr -append ^
+ogr2ogr ^
 -f CSV ^
-parcels_far_ua.csv ceqa_potential_80th_percentile.gdb Parcels_FAR_Units_Per_Acre
+data/parcels_far_ua_no_small.csv data/taz_ceqa_quantiles_esri.gdb Parcels_FAR_Units_Per_Acre_Non_Zero_Drop_Small

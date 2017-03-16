@@ -1,5 +1,5 @@
 import pandas as pd
-df = pd.read_csv("data/parcels_far_ua_no_small.csv")
+df = pd.read_csv("data\\parcels_far_ua_no_small.csv")
 
 def get_quantile_for_col(quantile, series):	
 	return 
@@ -28,7 +28,7 @@ df3["far_estimate_count"] = s2
 df3["units_per_acre_q8"] = s3
 df3["units_per_acre_estimate_count"] = s4
 
-df3.to_csv("data/taz_ua_far_quantiles.csv", index=True)
+df3.to_csv("data\\taz_ua_far_quantiles.csv", index=True)
 
 print(df3.head())
 print(df4.head())
