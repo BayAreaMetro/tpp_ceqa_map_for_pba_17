@@ -63,9 +63,9 @@ feature class name|PBA '13 legend name
 
 Current Map [here](http://arcg.is/XGm5v)   
 
-Naming Convention:     
-
 Current Data [here](https://mtcdrive.box.com/s/p2cygzun71worxqslqlkukpdawju3orb)
+
+Naming Convention:     
 
 feature class name|description name 
 -----------------|--------------------
