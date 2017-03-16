@@ -141,5 +141,5 @@ SELECT  pb.est_res_sq_ft,
 		JOIN DEIR2017.UrbanSim.Parcels as p
 			ON pb.parcel_id = p.parcel_id
 		JOIN UrbanSim.RUN7224_PARCEL_DATA_2040 AS y2040 ON p.PARCEL_ID = y2040.parcel_id
-		WHERE p.Acres > 0.05 and
+		WHERE p.Acres > 0.02 and
 		pb.units_per_acre > 0
