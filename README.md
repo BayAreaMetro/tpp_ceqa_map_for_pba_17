@@ -43,7 +43,7 @@ We applied a threshold of the value of DUA or FAR at the 80th percentile within 
 
 We clip the TAZ summaries to TPA's, following CEQA guidelines.   
 
-We also drop parcels with less than .01 acres of land. See [this issue](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/issues/15) for an explanation of why.   
+We also drop parcels with less than .02 acres of land. See [this issue](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/issues/15) for an explanation of why.   
 
 ### Outcome
 
