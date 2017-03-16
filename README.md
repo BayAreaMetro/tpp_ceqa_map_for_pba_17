@@ -55,9 +55,9 @@ Naming Convention:
 
 feature class name|PBA '13 legend name 
 -----------------|--------------------
-`residential_and_mixed_use_densities` | Approximate areas projected to meet residential and mixed-use densities
-`residential_densities` | Approximate areas projected to meet residential densities
-`areas_not_meeting_densities_tpas` | Approximate areas not projected to meet residential or mixed-use densities
+`meeting_residential_and_mixed_use_densities` | Approximate areas projected to meet residential and mixed-use densities
+`meeting_residential_densities` | Approximate areas projected to meet residential densities
+`not_meeting_densities_tpas` | Approximate areas not projected to meet residential or mixed-use densities
 
 #### Analysis:
 
