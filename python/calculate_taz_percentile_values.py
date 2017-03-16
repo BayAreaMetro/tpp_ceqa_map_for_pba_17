@@ -14,12 +14,16 @@ import numpy as np
 # a1 = np.arange(.4,.9,0.1)
 
 df1.set_index("taz_id", inplace=True)
-s1 = df1['far_estimate'].groupby(by=df1.index).quantile(0.8)
-s2 = df1['far_estimate'].groupby(by=df1.index).size()
-
 df2.set_index("taz_id", inplace=True)
-s3 = df2['units_per_acre'].groupby(by=df2.index).quantile(0.8)
-s4 = df2['units_per_acre'].groupby(by=df2.index).size()
+
+s_far = df1['far_estimate'].dropna()
+s_ua = df2['units_per_acre'].dropna()
+
+s1 = s_far.groupby(by=s_far.index).quantile(0.8)
+s2 = s_far.groupby(by=s_far.index).size()
+
+s3 = s_ua.groupby(by=s_ua.index).quantile(0.8)
+s4 = s_ua.groupby(by=s_ua.index).size()
 df4 = pd.DataFrame(index=s3.index)
 
 df3 = pd.DataFrame(index=s1.index)
