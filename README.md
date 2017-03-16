@@ -56,7 +56,7 @@ Naming Convention:
 feature class name|PBA '13 legend name 
 -----------------|--------------------
 `residential_and_mixed_use_densities` | Approximate areas projected to meet residential and mixed-use densities
-`residential_densities` | Approximate areas projecte3d to meet residential densities
+`residential_densities` | Approximate areas projected to meet residential densities
 `areas_not_meeting_densities_tpas` | Approximate areas not projected to meet residential or mixed-use densities
 
 #### Analysis:
@@ -70,6 +70,6 @@ Current Data [here](https://mtcdrive.box.com/s/p2cygzun71worxqslqlkukpdawju3orb)
 feature class name|description name 
 -----------------|--------------------
 `tpa_clipped_ua_filter` | Approximate areas projected to meet residential and mixed-use densities   
-`tpa_clipped_ua_far_filter` | Approximate areas projecte3d to meet residential densities   
+`tpa_clipped_ua_far_filter` | Approximate areas projected to meet residential densities   
 `tpa_clipped_taz` | TAZ clipped to TPA's--geometries only  
 `Parcels_FAR_Units_Per_Acre_Non_Zero_Drop_Small` | Source parcel data (acres, units, taz_id, etc)    
