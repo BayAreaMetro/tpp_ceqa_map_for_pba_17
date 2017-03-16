@@ -1,5 +1,5 @@
 import pandas as pd
-df = pd.read_csv("data/parcels_far_ua.csv")
+df = pd.read_csv("data/parcels_far_ua_no_small.csv")
 
 def get_quantile_for_col(quantile, series):	
 	return 

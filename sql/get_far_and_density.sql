@@ -103,8 +103,43 @@ SELECT  pb.est_res_sq_ft,
 		WHERE p.taz_id IN (1448, 1447, 1438, 1437, 1407)
 
 
-CREATE VIEW UrbanSim.Parcels_FAR_Units_Per_Acre AS
-SELECT  Y2040.total_residential_units JOIN
-		UrbanSim.RUN7224_PARCEL_DATA_2040 AS y2040 ON p.PARCEL_ID = y2040.parcel_id;
 
-/*potential false negatives: 409, 407, 547, 437, 436, 439, 599, 625, 554*/
+create view UrbanSim.County_Small_Parcel_Stats as
+SELECT  p.COUNTY_ID,
+		c.[NAME],
+		sum(p.Acres) as totacres,
+		sum(Y2040.total_residential_units) as totunits
+  FROM  DEIR2017.UrbanSim.Parcels as p
+		JOIN UrbanSim.RUN7224_PARCEL_DATA_2040 AS y2040 ON p.PARCEL_ID = y2040.parcel_id
+		JOIN [DEIR2017].[Analysis].[COUNTIES] c ON p.COUNTY_ID = c.COUNTY_FIP 
+		WHERE p.Acres < 0.05
+		GROUP BY p.COUNTY_ID, c.NAME
+
+---
+SELECT [COUNTY_ID]
+      ,[NAME]
+      ,cast([totacres] as integer) as totacres
+      ,cast([totunits] as integer) as totunits
+  FROM [DEIR2017].[UrbanSim].[County_Small_Parcel_Stats]
+
+/*
+output of above here: 
+https://gist.github.com/tombuckley/81f0d17ae10d14c7915d6600b81029c5
+*/
+
+CREATE VIEW UrbanSim.Parcels_FAR_Units_Per_Acre_Non_Zero_Drop_Small AS
+SELECT  pb.est_res_sq_ft,
+		pb.units_per_acre,
+		pb.far_estimate,
+		p.OBJECTID,
+		p.PARCEL_ID,
+		p.tpa_objectid,
+		p.taz_id,
+		p.Acres,
+		Y2040.total_residential_units
+  FROM  DEIR2017.UrbanSim.Parcels_FAR_Units_Per_Acre as pb
+		JOIN DEIR2017.UrbanSim.Parcels as p
+			ON pb.parcel_id = p.parcel_id
+		JOIN UrbanSim.RUN7224_PARCEL_DATA_2040 AS y2040 ON p.PARCEL_ID = y2040.parcel_id
+		WHERE p.Acres > 0.05 and
+		pb.units_per_acre > 0
