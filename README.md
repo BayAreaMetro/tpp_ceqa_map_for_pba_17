@@ -13,7 +13,7 @@ That map represents areas where CEQA project approval is possible/likely based r
 
 When necessary, these data are loaded onto the DEIR Database on MTC's Analysis--II server.   
 
-For convenience, we've developed a FileGDB of the data being used for and output by this project, available [here](https://mtcdrive.box.com/s/j9p7gzfoq7uj4qena9c8zn3t8o8rw76i).   
+For convenience, we've developed a FileGDB of the working data being used for this project, available [here](https://mtcdrive.box.com/s/j9p7gzfoq7uj4qena9c8zn3t8o8rw76i). The final [Outcome](#outcome) data is in its own FileGDB.
 
 #### Land Use Data   
 
@@ -32,109 +32,44 @@ UrbanSim Preferred scenario/FMMP urban footprint file (available [here](http://m
 ### Analysis Parameters  
 
 We need to assign each TAZ a 'yes' or 'no' value based on the CEQA thresholds of 20 units per acre and .75 FAR (for mixed use projects).  
-At base, we will need to know about the following parameters:   
-1  The Floor Area Ratio for each TAZ   
-2  The Units per Acre for each TAZ   
-3  The location of Transit Priority areas   
 
 CEQA Streamlining on is based on the Floor Area Ratio and the Units per Acre of an individual site and the location of the site within a Transit Priority Area. In the Model Map, a boolean value for whether CEQA streamlining was likely was estimated at the TAZ level for the given TAZ. It is unclear in that map what year the map was estimated for but we assume 2040 for this process.   
 
-
 ### Methodology    
 
-[aggregation technique and boolean assignment of areas](#aggregation-technique-and-boolean-assignment-of-areas)    
-[cartographic methods](#cartographic-methods)   
-[clipping to urban footprint](#clipping-to-urban-footprint)   
+The first problem that we faced was that the data that we had are measured at the parcel level. So we had to aggregate that data up to TAZ's in order to assign a TAZ 'yes' OR 'no'. 
 
+We applied a threshold of the value of DUA or FAR at the 80th percentile within each TAZ based on the distribution within each TAZ.       
 
+We clip the TAZ summaries to TPA's, following CEQA guidelines.   
 
-
-#### Aggregation Technique and Boolean Assignment of Areas:  
-
-The first problem that we faced was that the data that we had are measured at the parcel level. So we had to aggregate that data up to TAZ's in order to assign a TAZ 'yes' OR 'no'. Since CEQA projects apply to projects that are consistent with the Sustainable Communities Strategy, including all land use designations, employment distribution densities,building space intensities and applicable policies, We had to spend some time thinking about what the appropriate method was for deciding what threshold a TAZ shuold meet for being a potential 'yes' or 'no'. Below we outline some of the methods we considered.   
-
-[average density method](#average-density-method)   
-[use of percentile rather than average](#use-of-percentile-rather-than-average)   
-[can't assume land use distributions within a taz are normal](#can't-assume-land-use-distributions-within-a-taz-are-normal)   
-
-
-##### Average Density Method   
-
-(1) and (2) were summarized from UrbanSim outputs on the DEIR database using the `sql/get_far_and_density.sql` script.  
-
-In this case, we defined the Floor Area Ratio and the Units per Acre for each TAZ as the average over each parcel within each TAZ.   
-  
-An AGOL Map based on this method is [here](http://arcg.is/2m8H2aK)  
-
-##### Use of Percentile rather than Average   
-
-In reviewing the above we found that there were a number of places in which we expected CEQA might be likely to be applied which were not included in the map including: Berkeley, some parts of Western SF, and areas along North 1st Street in San Jose. In addition, there were a few places such as North Vallejo and South Novato in which development CEQA application seems like it would have been unlikely.  
-
-So we tried applying a method in which any TAZ in which the 80th percentile (top 20% of the distribution) of parcels might qualify for CEQA would be tagged as a potential CEQA streamlining TAZ. 
-
-An AGOL Map of data based on this method is [here](http://mtc.maps.arcgis.com/home/item.html?id=c75f9011843842eb96b64ff28abbb698&jobid=a30452e8-ebd7-4da2-a46e-6a747288637c).   
-
-The SQL query used to summarize the data is [here](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/blob/master/sql/get_far_and_density.sql#L67-L86).   
-
-##### Can't Assume Land Use Distributions within a TAZ are Normal    
-
-Another methodological issue is that using an assumed normal distribution for density is unreasonable. So we applied a threshold of the 80th percentile within each TAZ based on the actual distribution of the given variable (Units per Acre or FAR) within each taz.    
-
-All of the feature classes at the various quartiles  are output to an AGOL map [here](http://mtc.maps.arcgis.com/home/item.html?id=46a5f6b4c0c44bf6b529daa157ce8be8).   
-
-###### Steps to do get the output:   
-
-It was more expedient to use Pandas to apply the quantile analysis, so we followed the following steps to get quantile thresholds for each TAZ for each density value:
-
-1) dump the parcel density table (`UrbanSim.Parcels_FAR_Units_Per_Acre_SP`) to disk
-
-2) create CSV's of the values at a set of reasonable quantiles within each TAZ (`python/calculate_taz_percentile_values.py`)
-
-3) load those CSV's back to a FileGDB with TAZ geometries. AGOL link to data [here](http://mtc.maps.arcgis.com/home/item.html?id=0d4c83530b9f4039a09a497b28e2a386). (`load_taz_quantile_data.bat`, `join_taz_quantiles_to_shapes.bat`)    
-
-#### Cartographic Methods   
-
-Once we had hammered out some of the methodological issues above, it became clear that there were also cartographic decisions at play in the Model Map. Below we discuss those.   
-
-##### Clipping to Urban Footprint   
-
-The unit to which we are aggregating (the TAZ) makes sense for modeling, but presents problems cartographically. For example, there is a large TPA in the Presidio by GG Bridge, and a large TAZ there as well. So if we only clip the TAZ summaries to the TPA's, we end up with areas that are unlikely to see CEQA projects.   
+We also drop parcels with less than .01 acres of land. See [this issue](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/issues/15) for an explanation of why.   
 
 ### Outcome
 
-[output data details](#output-data-details)   
-[average density version](#average-density-version)   
-[normal distribution version](#normal-distribution-version)   
-[alternative distributions version](#alternative-distributions-version)   
+#### Design:
 
-Current Data [here](https://mtcdrive.box.com/s/j9p7gzfoq7uj4qena9c8zn3t8o8rw76i)   
+Current Data [here](https://mtcdrive.box.com/s/hsgqp9z5gb8emxett9fulttrkse876pt)
 
-Current Map [here](http://arcg.is/XGm5v)  
+Naming Convention:  
 
-##### Output Data Details    
+feature class name|PBA '13 legend name 
+-----------------|--------------------
+`residential_and_mixed_use_densities` | Approximate areas projected to meet residential and mixed-use densities
+`residential_densities` | Approximate areas projecte3d to meet residential densities
+`areas_not_meeting_densities_tpas` | Approximate areas not projected to meet residential or mixed-use densities
 
-##### Average Density Version:   
+#### Analysis:
 
-FileGDB [here](https://mtcdrive.box.com/s/tn7lmjryk7hgg8gsi0uogwq8vdof2yl0)
+Current Map [here](http://arcg.is/XGm5v)   
 
-##### Normal Distribution Version:
+Naming Convention:     
 
-The feature classes in here include:
+Current Data [here](https://mtcdrive.box.com/s/p2cygzun71worxqslqlkukpdawju3orb)
 
-1) potential CEQA TAZ's based on Units per acre   
-2) potential CEQA TAZ's based on Units per acre AND FAR   
-3) potential CEQA TAZ's (*_ALL_VARS) clipped to the TPA's (which are a necessary area qualification for SQL) with all source data, regardless of what density threshold they meet. we included this last feature class in order to allow us to review all density values and potentially simply toggle on those.   
-
-##### Alternative Distributions Version:   
-
-The output of the 3rd round is a set of feature classes, each of which is subset to a given quartile threshold. 
-
-The naming convention for these feature classes, [here](http://mtc.maps.arcgis.com/home/item.html?id=46a5f6b4c0c44bf6b529daa157ce8be8), is:
-
-`far_sp_q8` - a subset of all TAZ's in which the FAR is over the .75 CEQA threshold for the 80th percentile (quartile). 
-
-`far_sp_q7` - a subset of all TAZ's in which the FAR is over the .75 CEQA threshold for the 70th percentile (quartile). 
-
-`ua_sp_q8` - a subset of all TAZ's in which the Units per Acre is over the 20 units/acre CEQA threshold for the 80th percentile (quartile). 
-
-`far_sp_q4_clip_to_uf_and_tpa` is an example of what these TAZ's look like when clipped to TPAs and the Urban Footprint. Below we talk a bit more about why that clipping is necessary. 
+feature class name|description name 
+-----------------|--------------------
+`tpa_clipped_ua_filter` | Approximate areas projected to meet residential and mixed-use densities   
+`tpa_clipped_ua_far_filter` | Approximate areas projecte3d to meet residential densities   
+`tpa_clipped_taz` | TAZ clipped to TPA's--geometries only  
+`Parcels_FAR_Units_Per_Acre_Non_Zero_Drop_Small` | Source parcel data (acres, units, taz_id, etc)    
