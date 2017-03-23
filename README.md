@@ -21,7 +21,7 @@ The majority of the land use data for this map are from County Assessors, ESRI, 
 
 A subset of these data, those that reflect change between years 2010 and 2040, are output by MTC's implementation of [UrbanSim](https://github.com/MetropolitanTransportationCommission/bayarea_urbansim). The UrbanSim output we use are all sourced from [Box](https://mtcdrive.box.com/s/zk8xw9i531sa5czfrn2qpg6fes6agsa4). 
 
-UrbanSim Preferred scenario/FMMP urban footprint file (available [here](http://mtc.maps.arcgis.com/home/item.html?id=43cd558b015143089d62226396d1d11e&jobid=47cfc388-f7fb-41a1-ae34-1fb1029566b6).     
+UrbanSim Preferred scenario/FMMP urban footprint file available [here](http://mtc.maps.arcgis.com/home/item.html?id=43cd558b015143089d62226396d1d11e&jobid=47cfc388-f7fb-41a1-ae34-1fb1029566b6).     
 
 #### Transportation Data  
 
