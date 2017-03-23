@@ -17,7 +17,7 @@ For convenience, we've developed a FileGDB of the working data being used for th
 
 #### Land Use Data   
 
-The majority of the land use data for this map are from County Assessors, ESRI, RedFin, CoStar, and MTC, as documented [here](https://github.com/MetropolitanTransportationCommission/bayarea_urbansim/blob/master/data_regeneration/metadata.csv).   
+The majority of the land use data for this map are from County Assessors, ESRI, RedFin, CoStar, and MTC, as documented [here](https://github.com/MetropolitanTransportationCommission/bayarea_urbansim/blob/e2705babbc29a24897fd8d22a83c1545fa5203b7/data_regeneration/metadata.csv).   
 
 A subset of these data, those that reflect change between years 2010 and 2040, are output by MTC's implementation of [UrbanSim](https://github.com/MetropolitanTransportationCommission/bayarea_urbansim). The UrbanSim output we use are all sourced from [Box](https://mtcdrive.box.com/s/zk8xw9i531sa5czfrn2qpg6fes6agsa4). 
 
