@@ -67,9 +67,9 @@ Current Data [here](https://mtcdrive.box.com/s/p2cygzun71worxqslqlkukpdawju3orb)
 
 Naming Convention:     
 
-feature class name|description name 
+feature class name|description name
 -----------------|--------------------
-`tpa_clipped_ua_filter` | Approximate areas projected to meet residential and mixed-use densities   
-`tpa_clipped_ua_far_filter` | Approximate areas projected to meet residential densities   
+`tpa_clipped_ua_filter` | Approximate areas projected to meet [residential and mixed-use densities](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/blob/77f3301eaeb684b01efe6292ebfec4a91ad8f028/etl/filter_geometries_to_ceqa_threshold.bat#L28)   
+`tpa_clipped_ua_far_filter` | Approximate areas projected to meet [residential densities](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/blob/77f3301eaeb684b01efe6292ebfec4a91ad8f028/etl/filter_geometries_to_ceqa_threshold.bat#L14)   
 `tpa_clipped_taz` | TAZ clipped to TPA's--geometries only  
 `Parcels_FAR_Units_Per_Acre_Non_Zero_Drop_Small` | Source parcel data (acres, units, taz_id, etc)    
