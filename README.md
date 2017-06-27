@@ -73,3 +73,13 @@ feature class name|description name
 `tpa_clipped_ua_far_filter` | Approximate areas projected to meet [residential densities](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/blob/77f3301eaeb684b01efe6292ebfec4a91ad8f028/etl/filter_geometries_to_ceqa_threshold.bat#L14)   
 `tpa_clipped_taz` | TAZ clipped to TPA's--geometries only  
 `Parcels_FAR_Units_Per_Acre_Non_Zero_Drop_Small` | Source parcel data (acres, units, taz_id, etc)    
+
+#### Pseudo-Batch Script  
+
+
+
+[calculate TAZ percentage values for variables of interes](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/blob/8179835cf59b0e258ed510ac3f4990fe62394b6f/python/calculate_taz_percentile_values.py)   
+
+[join_quantiles to shapes](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/blob/0c108f09d85bc79d229f6a5ccb045ad77ea1761e/etl/join_taz_quantiles_to_shapes.bat#L33-L40)  
+
+[filter to just those geometries meeting thresholds for CEQA](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/blob/77f3301eaeb684b01efe6292ebfec4a91ad8f028/etl/filter_geometries_to_ceqa_threshold.bat)  
