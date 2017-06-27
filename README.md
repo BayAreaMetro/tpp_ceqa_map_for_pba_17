@@ -78,7 +78,7 @@ feature class name|description name
 
 
 
-[calculate TAZ percentage values for variables of interes](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/blob/8179835cf59b0e258ed510ac3f4990fe62394b6f/python/calculate_taz_percentile_values.py)   
+[calculate TAZ percentage values for variables of interest](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/blob/8179835cf59b0e258ed510ac3f4990fe62394b6f/python/calculate_taz_percentile_values.py)   
 
 [join_quantiles to shapes](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/blob/0c108f09d85bc79d229f6a5ccb045ad77ea1761e/etl/join_taz_quantiles_to_shapes.bat#L33-L40)  
 
