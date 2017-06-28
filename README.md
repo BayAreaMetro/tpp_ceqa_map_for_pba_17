@@ -74,6 +74,13 @@ feature class name|description name
 `tpa_clipped_taz` | TAZ clipped to TPA's--geometries only  
 `Parcels_FAR_Units_Per_Acre_Non_Zero_Drop_Small` | Source parcel data (acres, units, taz_id, etc)    
 
+##### Variable Naming Convention:
+
+`ua`: units per acre  
+`far`: floor area ratio  
+`q8`: 0.80 [quantile](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.quantile.html)  
+
+
 #### Pseudo-Batch Script  
 
 1. [export far and density data to csv](https://github.com/MetropolitanTransportationCommission/tpp_ceqa_map_for_pba_17/blob/0c108f09d85bc79d229f6a5ccb045ad77ea1761e/etl/export_far_and_density_data.bat)  
